@@ -1,0 +1,99 @@
+import javax.swing.*;
+import java.util.Random;
+
+public class Jarra {
+    public static void main(String[] args) {
+        
+        String est_jarras="(0,0)"+"\n";
+        int [] jarras = {0,0,0,0,0,0,0,0};
+        boolean salir=true;
+        int j4=0,j3=0,j, operador;
+        int r1=0,r2=0,r5=0,r6=0,r7=0,r8=0,r9=0,r10=0,total;
+        StringBuffer buffer = new StringBuffer();
+        Random random = new Random();
+        
+        while(j4!=2){
+        
+       if(j4<4){
+            jarras[0]= 1;
+        }if (j3<3){
+            jarras[1]= 2;
+        }if (j4>0){
+            jarras[2]= 5;
+        }if (j3>0){
+            jarras[3]= 6;
+        }if (j4>0&&j3<3&&j4+j3>=3){
+            jarras[4]= 7;
+        }if (j4>4&&j3>0&&j4+j3>=4){
+            jarras[5]= 8;
+        }if (j4>0&&j3<3&&j4+j3<=3){
+            jarras[6]= 9;
+        }if (j4<4&&j3>0&&j4+j3<=4){
+            jarras[7]= 10;
+        }
+        
+        do{
+        j=(int)(Math.random()*8);
+        if (jarras[j]!=0){
+            salir=false;
+        }
+        }while(salir);
+        switch(j){
+            case 0:
+            r1 +=1;
+                j4=4;
+                est_jarras+= "("+j4+","+j3+")" + "\n";
+                break;
+            case 1:
+            r2 +=1;
+                j3=3;
+                est_jarras+= "("+j4+","+j3+")" + "\n";
+                break;
+            case 2:
+            r5 +=1;
+                j4=0;
+                est_jarras+= "("+j4+","+j3+")" + "\n";
+                break;
+            case 3:
+            r6 +=1;
+                j3=0;
+                est_jarras+= "("+j4+","+j3+")" + "\n";
+                break;
+            case 4:
+            r7 +=1;
+                j4= j4-(3-j3);
+                j3=3;
+                est_jarras+= "("+j4+","+j3+")" + "\n";
+                break;
+            case 5:
+            r8 +=1;
+                j3=j3-(4-j4);
+                j4=4;
+                est_jarras+= "("+j4+","+j3+")" + "\n";
+                break;
+            case 6:
+            r9 +=1;
+                j3=j3+j4;
+                j4=0;
+                est_jarras+= "("+j4+","+j3+")" + "\n";
+                break;
+            case 7:
+            r10 +=1;
+                j4=j3+j4;
+                j3=0;
+                est_jarras+= "("+j4+","+j3+")" + "\n";
+                break;
+        }
+        for(int x=0;x<=7;x++){
+            jarras[x]=0;
+        }
+        salir=true;
+        } 
+        
+        total = r1+r2+r5+r6+r7+r8+r9+r10;
+        System.out.println("Movimientos totales: "+total+" movimientos");
+         JTextArea area = new JTextArea ( est_jarras , 30 , 10);
+        JScrollPane panel = new JScrollPane ( area , JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JOptionPane.showMessageDialog (null , panel);
+    }
+}
